@@ -11,6 +11,7 @@ namespace ShellInfo.Todo.Models
         public string Name { get; set; }
         public string PassWord { get; set; }
         public string PhoneNum { get; set; }
+		public string Status {get;set;}
        
     }
 }
