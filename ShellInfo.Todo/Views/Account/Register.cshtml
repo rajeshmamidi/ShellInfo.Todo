@@ -1,0 +1,111 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+@{
+    Layout = null;
+}
+<script src="~/Scripts/Register.js"></script>
+<script src="Scripts/Search.js"></script>
+
+<hr />
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>User Creation</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row" style="margin-top:20px">
+                        <div class="col-md-12">
+                            <form asp-area="" asp-controller="Account" asp-action="Register" method="post" id="registerForm">
+                                @*<h4>Create a new account.</h4>*@
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                @if (ViewData["Success"] != null)
+                                {
+                                    <div class="text-success">
+                                        <p>@ViewData["Success"].ToString()</p>
+                                    </div>
+                                }
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label asp-for="UserName" class="col-md-2 col-form-label"  autocomplete="off" style="font:bold"></label>
+                                            <div class="col-md-4">
+                                                <input asp-for="UserName" class="form-control" onchange="checkUser()" />
+                                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                            </div>
+
+                                            <label asp-for="Name" class="col-md-2 col-form-label" style="font:bold"></label>
+                                            <div class="col-md-4">
+                                                <input asp-for="Name" class="form-control" />
+                                                <span asp-validation-for="Name" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="lblGeography" class="col-md-2 col-form-label" style="font:bold">State/Region/Taluk/Village</label>
+                                            <div class="col-md-4">
+                                                <input type="text" name="lblGeography" id="lblGeography" class="form-control" />
+                                                <span asp-validation-for="Geography" class="text-danger"></span>
+                                                <input asp-for="Geography" type="hidden" />
+                                                <input asp-for="GeographyId" type="hidden" />
+                                                <input asp-for="Level" type="hidden" />
+                                            </div>
+
+                                            <label asp-for="PhoneNumber" class="col-md-2 col-form-label" style="font:bold"></label>
+                                            <div class="col-md-4">
+                                                <input asp-for="PhoneNumber" class="form-control" />
+                                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label asp-for="Email" class="col-md-2 col-form-label" style="font:bold"></label>
+                                            <div class="col-md-4">
+                                                <input asp-for="Email" class="form-control" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+
+                                            <label asp-for="Password" class="col-md-2 col-form-label" style="font:bold"></label>
+                                            <div class="col-md-4">
+                                                <input asp-for="Password" class="form-control" autocomplete="off" />
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-6">
+                                            </div>
+                                            <label asp-for="ConfirmPassword" class="col-md-2 col-form-label" style="font:bold"></label>
+                                            <div class="col-md-4">
+                                                <input asp-for="ConfirmPassword" class="form-control"  autocomplete="off" />
+                                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="button" onclick="registerUser()" value="Register" class="btn btn-success" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

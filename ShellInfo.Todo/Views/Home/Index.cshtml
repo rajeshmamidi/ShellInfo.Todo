@@ -1,0 +1,228 @@
+﻿@{
+    Layout = null;
+}
+@using Microsoft.AspNetCore.Identity
+@using ShellInfo.Todo.Models
+@using System.Globalization;
+
+@{
+    TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+    var userName = textInfo.ToTitleCase(ViewData["UserName"].ToString());
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
+    <meta name="author" content="Łukasz Holeczek">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>West Bengal PDS - FPS Automation Solution</title>
+    <!-- Icons-->
+    <link href="vendors/@@coreui/icons/css/coreui-icons.min.css" rel="stylesheet">
+    <link href="vendors/flag-icon-css/css/flag-icon.min.css" rel="stylesheet">
+    <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="vendors/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="/css/jquery-ui-1.9.2.custom.css" rel="stylesheet" />
+    <link href="/css/ui.jqgrid.css" rel="stylesheet" />
+    <!-- Main styles for this application-->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet" />
+    <link href="vendors/pace-progress/css/pace.min.css" rel="stylesheet">
+    <link href="css/site.css" rel="stylesheet">
+
+</head>
+
+@{
+    string className = "";
+    string appBodyClassName = "";
+    if (ViewData["UserName"].ToString() == "Dashboard")
+    {
+        className = "app header-fixed sidebar-fixed aside-menu-fixed "; //Hide menu for dashboard
+        appBodyClassName = "";
+    }
+    else
+    {
+        className = "app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show";
+        appBodyClassName = "app-body";
+    }
+    }
+
+
+<body class="@className">
+    @if (ViewData["UserName"].ToString() == "Dashboard")
+    {
+        //Hide header for dashboard user
+        <header class="navbar dashboard-bar">
+            <div class="dashboard-bar-inner">FPS Automation Dashboard</div>
+        </header>        
+    }
+    else
+    {
+        <header class="app-header navbar">
+
+            <button class="navbar-toggler sidebar-toggler d-lg-none mr-auto" type="button" data-toggle="sidebar-show">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img class="navbar-brand-full" src="img/brand/logo.png" width="160" height="43" alt="CoreUI Logo">
+                <img class="navbar-brand-minimized" src="img/brand/logo-min.png" width="30" height="30" alt="CoreUI Logo">
+            </a>
+            <button class="navbar-toggler sidebar-toggler d-md-down-none" type="button" data-toggle="sidebar-lg-show">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+
+
+            <h6 style="float: left; padding-left: 20px; font-weight: bold;"> <asp-area ="" asp-controller="Manage" asp-action="Index" title="Manage">Welcome,  @textInfo.ToTitleCase(ViewData["UserName"].ToString().ToLower()) (@textInfo.ToTitleCase(ViewData["WelComeGeo"].ToString().ToLower()))!</h6>
+
+
+            <ul class="nav navbar-nav ml-auto"></ul>
+            <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm2">
+                <span class="nav-item" style="padding:0px 20px 0px 0px ;font-weight: bold;">
+                    <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout&nbsp;<i class="fa fa-sign-out"></i></button>
+                </span>
+            </form>
+        </header>
+    }
+    <div class="@appBodyClassName">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a asp-authorize class="nav-link" href="main.html">
+                            <i class="nav-icon fa icon-speedometer"></i> Dashboard
+                            <span class="badge badge-primary">NEW</span>
+                        </a>
+                    </li>
+                    <li class="nav-title">Theme</li>
+                    <li asp-authorize asp-roles="Admin,ZGUser" class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="nav-icon fa fa-home"></i> Masters
+                        </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="BlockMaster.html">
+                                    <i class="nav-icon icon-speedometer"></i> Block Master
+                                </a>
+                            </li>                                                                                                                                
+                        </ul>
+                    </li>                   
+                                         
+                    <li class="nav-title">My Account</li>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link nav-dropdown-toggle" href="#">
+                            <i class="nav-icon fa icon-credit-card"></i> My Account
+                        </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Account/ResetPasswordAdmin">
+                                    <i class="nav-icon icon-puzzle"></i> Change Password
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+                                    <span class="nav-item">
+                                        <button type="submit" class="btn btn-link navbar-btn navbar-link">Logout&nbsp;<i class="fa fa-sign-out"></i></button>
+                                    </span>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <button class="sidebar-minimizer brand-minimizer" type="button"></button>
+        </div>
+        <main class="main">
+            <!-- Breadcrumb-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Home</li>
+            </ol>
+            <div class="container-fluid">
+                <div id="ui-view"></div>
+            </div>
+        </main>
+        <aside class="aside-menu">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#timeline" role="tab">
+                        <i class="icon-list"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#messages" role="tab">
+                        <i class="icon-speech"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#settings" role="tab">
+                        <i class="icon-settings"></i>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <input type="hidden" name="indexPage" id="indexPage" value="true" />
+    <input type="hidden" name="geography" id="geography" value="@ViewData["Geography"]" />
+    <input type="hidden" name="level" id="level" value="@ViewData["Level"]" />
+    <input type="hidden" name="geographyId" id="geographyId" value="@ViewData["GeographyId"]" />
+    <input type="hidden" name="roles" id="roles" value="@ViewData["Roles"]" />
+    <input type="hidden" name="userId" id="userId" value="@ViewData["UserId"]" />
+    <input type="hidden" name="userName" id="userName" value="@ViewData["UserName"]" />
+    <input type="hidden" name="ZoneGroup" id="ZoneGroup" value="@ViewData["ZoneGroup"]" />
+    <input type="hidden" name="Zone" id="Zone" value="@ViewData["Zone"]" />
+    <input type="hidden" name="Dist" id="Dist" value="@ViewData["District"]" />
+    <input type="hidden" name="DistCode" id="DistCode" value="@ViewData["DistrictCode"]" />
+    <input type="hidden" name="Subdivision" id="Subdivision" value="@ViewData["Subdivision"]" />
+    @Html.AntiForgeryToken()
+
+    @if (ViewData["UserName"].ToString() == "Dashboard")
+    {
+        //Hide footer
+    }
+    else
+    {
+        <footer class="app-footer">
+            <div>
+                <span>V1.2.6</span>
+            </div>
+            <div class="ml-auto">
+                <span>Powered by</span>
+                <a href="https://wb.gov.in/">Govt of West Bengal</a>
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="x-modal-header">
+                            <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
+                        <div class="closeBtn">
+                            <button type="button" class="close-btn" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="popup-view"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    }
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="vendors/jquery/js/jquery.min.js"></script>
+    <script src="vendors/popper.js/js/popper.min.js"></script>
+    <script src="vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/pace-progress/js/pace.min.js"></script>
+    <script src="vendors/perfect-scrollbar/js/perfect-scrollbar.min.js"></script>
+    <script src="vendors/@@coreui/coreui/js/coreui.min.js"></script>
+    <script src="/vendors/jquery/js/jquery-ui.js"></script>
+    <script src="/js/jquery.jqgrid.min.js"></script>
+    <script src="/js/site.js"></script>
+</body>
+</html>

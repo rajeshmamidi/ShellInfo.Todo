@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>West Bengal PDS - FPS Automation</title>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="navbar login-bar">
+        West Bengal PDS - FPS Automation
+        <div class="navbar-collapse collapse">
+            <partial name="_LoginPartial" />
+        </div>
+    </header>
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2019 - West Bengal Government</p>
+        </footer>
+    </div>
+
+
+    <!-- CoreUI and necessary plugins-->
+    <script src="/vendors/jquery/js/jquery.min.js"></script>
+    <script src="/vendors/popper.js/js/popper.min.js"></script>
+    <script src="/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendors/pace-progress/js/pace.min.js"></script>
+    <script src="/vendors/jquery/js/jquery-ui.js"></script>
+    <script src="/js/site.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

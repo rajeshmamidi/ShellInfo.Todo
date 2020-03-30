@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ApplicationRole>
+
+@{
+    ViewData["Title"] = "Role List";
+}
+@{
+    Layout = null;
+}
+
+    <link href="/vendors/jquery-bonsai/jquery.bonsai.css" rel="stylesheet" />
+    <script src="/vendors/jquery-qubit/jquery.qubit.js"></script>
+    <script src="/vendors/jquery-bonsai/jquery.bonsai.js"></script>
+    <script src="/Scripts/Role.js"></script>
+
+<h2>Role List</h2>
+
+<a class="myHref" href="/Role/Create">Create Role</a>
+<div class="row">
+    <div class="col-md-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th> @Html.DisplayNameFor(m => m.Name) </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => role.Name)</td>
+                        <td>
+                            <a class="myHref" href="/Role/Edit/@role.Id">Edit</a> |
+                            <a class="myHref" href="/Role/Delete/@role.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

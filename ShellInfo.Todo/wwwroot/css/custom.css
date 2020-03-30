@@ -1,0 +1,94 @@
+﻿/***
+html, body, .container-table {
+    height: 100%;
+}
+.container-table {
+    display: table;
+}
+
+.vertical-center-row {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.modal-dialog {
+    top:15%;
+    width: 90%;
+    height:75%;
+    max-width: 90%;
+}
+
+.x-modal-header {
+    height:10px;
+    background: #f0f3f5;
+}
+
+.modal-body {
+    height:75%;
+    max-height: 65%;
+}
+.modal .x-modal-header .btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    z-index:2000;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+****/
+.card {
+    margin-bottom: 10px;
+}
+.chart-wrapper-dashboard {
+    height: 330px;
+}
+.modal-dialog {
+    width: 1250px; /* New width for default modal */
+}
+
+.modal-lg {
+    width: 1250px; /* New width for large modal */
+    max-width: 1250px; /* New width for large modal */
+}
+
+.ui-autocomplete {
+    position: absolute;
+    cursor: default;
+    z-index: 3000 !important;
+} 
+
+.nav-title {
+    display: none;
+}
+
+.close-btn {
+    display: block;
+    float: right;
+    position: relative;
+    top: -40px;
+    right: -30px;
+    z-index: 99999;
+}
+
+.closeBtn {
+    height: 1px;
+}
+
+.centered {
+    margin: auto;
+    max-width: 900px;
+}
+
+.header-fixed .app-body {
+    margin-top: 65px;
+}
+
+.breadcrumb{
+    display: none;
+}
+
+.progress {
+    background: rgba(204, 202, 202, 1);
+}

@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Upload File</h2>
+<div class="row">
+    <section>
+        <form method="post" enctype="multipart/form-data"
+              action="/ServerUploadFiles">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="file" name="files"  multiple />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" id="BtnUpload" />
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+
+
+@*<ul>
+    <li><a asp-controller="Profile" asp-action="Index">Profile Sample</a></li>
+    <li><a asp-controller="Streaming" asp-action="Index">Streaming Upload Sample</a></li>
+</ul>*@
+

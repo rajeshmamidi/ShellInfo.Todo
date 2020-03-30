@@ -1,0 +1,128 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+@{
+    Layout = null;
+}
+
+<script>
+    var js = ["/Scripts/Register.js"];
+    var $head = $("head");
+    for (var i = 0; i < js.length; i++) {
+        $head.append("<script src=\"" + js[i] + "?v=6\"></scr" + "ipt>");
+    }
+</script>
+
+<hr />
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>User Creation</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row" style="margin-top:20px">
+                        @*<div style="margin-top:20px">*@
+                            <div class="col-md-12">
+                                <form asp-area="" asp-controller="Account" asp-action="Edit" method="post" id="registerForm">
+                                    @*<h4>Create a new account.</h4>*@
+                                    @*<hr />*@
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    @if (ViewData["Success"] != null)
+                                    {
+                                        <div class="text-success">
+                                            <p>@ViewData["Success"].ToString()</p>
+                                        </div>
+                                    }
+                                    @*<div class="form-group">*@
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label asp-for="UserName" class="col-md-2 col-form-label" style="font:bold"></label>
+                                                <div class="col-md-4">
+                                                    <input asp-for="UserName" class="form-control" onchange="checkUser()" />
+                                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                                </div>
+
+                                                @*<div class="form-group">*@
+                                                <label asp-for="Name" class="col-md-2 col-form-label" style="font:bold"></label>
+                                                <div class="col-md-4">
+                                                    <input asp-for="Name" class="form-control" />
+                                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="form-group">*@
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label for="lblGeography" class="col-md-2 col-form-label" style="font:bold">State/Region/Taluk/Village</label>
+                                                <div class="col-md-4">
+                                                    <input type="text" asp-for="Geography" name="lblGeography" id="lblGeography" class="form-control" />
+                                                    <span asp-validation-for="Geography" class="text-danger"></span>
+                                                </div>
+
+                                                <input asp-for="Geography" type="hidden" />
+                                                <input asp-for="GeographyId" type="hidden" />
+                                                <input asp-for="Level" type="hidden" />
+                                                <input asp-for="Password" type="hidden" value="xxxxxx" />
+                                                <input asp-for="ConfirmPassword" type="hidden" value="xxxxxx" />
+                                                <input asp-for="Id" type="hidden" />
+
+                                                @*<div class="form-group">*@
+                                                <label asp-for="PhoneNumber" class="col-md-2 col-form-label" style="font:bold"></label>
+                                                <div class="col-md-4">
+                                                    <input asp-for="PhoneNumber" class="form-control" />
+                                                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="form-group">*@
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                </div>
+                                                <label asp-for="Email" class="col-md-2 col-form-label" style="font:bold"></label>
+                                                <div class="col-md-4">
+                                                    <input asp-for="Email" class="form-control" />
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                <input type="button" onclick="editUser()" value="Update" class="btn btn-success" />
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@*</div>*@
+
+<script>
+function editUser()
+{
+    $.ajax({
+        url: '/Account/Edit',
+        type: 'post',    
+        data: $('form#registerForm').serialize(),
+        success: function(data) {
+            console.log("This is the data:" + JSON.stringify(data))
+                   $("#ui-view").html(data);
+                 }
+    });
+}
+</script>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

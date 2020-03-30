@@ -1,0 +1,23 @@
+﻿@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid orange;
+        padding: 10px;
+        text-align: left;
+    }
+</style>
+
+<html>
+<body>
+    @Html.Raw(@ViewData["Response"]);
+</body>
+</html>

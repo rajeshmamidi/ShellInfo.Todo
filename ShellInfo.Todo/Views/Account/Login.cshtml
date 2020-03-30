@@ -1,0 +1,137 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    Layout = "_LayoutLogin";
+}
+@{
+    ViewData["Title"] = "Log in";
+}
+@*<h2>@ViewData["Title"]</h2>*@
+<script src="~/js/crypto-js.js"></script>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 container_log">
+            <div class="row">
+                <div class="main_container" style="width:300px">
+                    <div class="log_panel">
+                        <div class="log_title">
+                            <span> Sign in</span>
+                        </div>
+                        <div class="log_body">
+                            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <fieldset>
+                                    <input type="hidden" name="showCaptcha" id="showCaptcha" value="@ViewData["showCaptcha"]" />
+                                    <input type="hidden" name="randomNumber" id="randomNumber" value="@ViewData["RandomNumber"]" />
+                                    <input type="hidden" name="token" id="token" value="@ViewData["Token"]" />
+                                    <input type="hidden" name="hdnPWD" id="hdnPWD" value="" />
+                                    <div class="row">
+                                        <div class="log_container ">
+                                            <div class="form-group">
+                                                <label>UserName</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-user"></i>
+                                                    </span>
+                                                    <input asp-for="Email" class="form-control"  autocomplete="off"/>
+                                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Password"></label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-lock"></i>
+                                                    </span>
+                                                    <input asp-for="Password" class="form-control" autocomplete="off"/>
+                                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                                </div>
+                                            </div>
+                                            <div class="d-none captcha">
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div id="captchaImg"></div>
+                                                        <input asp-for="Captcha" class="form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-7">
+                                                        <div class="checkbox">
+                                                            <label asp-for="RememberMe" class="rememberMe">
+                                                                <input asp-for="RememberMe" />
+                                                                @Html.DisplayNameFor(m => m.RememberMe)
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <div class="form-group">
+                                                            @*onclick="return SubmitsEncry();"*@
+                                                            <button type="submit" class="btn  btn-primary loginBtn" onclick="return SubmitsEncry();">Log in</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                            </form>
+                        </div>
+                        <div class="log_footer ">
+                            <a asp-action="ForgotPassword">Forgot password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- Carousel container -->
+
+        <div class="col-md-9 slide_container">
+            <div id="demo" class="carousel slide" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+
+                <!-- The slideshow -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="~/images/imgs3.png" alt="Los Angeles">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/imgs4.jpg" alt="Chicago">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="~/images/imgs5.jpg" alt="New York">
+                    </div>
+                </div>
+
+                <!-- Left and right controls -->
+                <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </a>
+                <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
